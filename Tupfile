@@ -1,0 +1,10 @@
+PROGRAM=life
+CXX=g++
+CXXFLAGS = -pipe -O3 -march=native -Wall -Werror -flto -I include -ffast-math -funsafe-math-optimizations
+LDFLAGS = -flto -L lib -lraylib -lopengl32 -lgdi32 -lwinmm -lws2_32
+
+!cxx = |> ^cj %o^ $(CXX) -c -o %o %f $(CXXFLAGS) |>
+!ld = |> ^cj %o^ $(CXX) -o %o %f $(LDFLAGS) |>
+
+: foreach src/*.cpp |> !cxx |> obj/%B.o {objs}
+: {objs} |> !ld |> a.exe
