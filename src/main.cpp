@@ -46,11 +46,11 @@ int main() {
         if (WindowShouldClose())
             exit_now();
 
-        if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
-            int x = GetMouseX() / BLOCK_SIZE;
-            int y = GetMouseY() / BLOCK_SIZE;
-            world[x][y] = {TEAM_BLUE};
-        }
+        // if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
+        //     int x = GetMouseX() / BLOCK_SIZE;
+        //     int y = GetMouseY() / BLOCK_SIZE;
+        //     world[x][y] = {TEAM_BLUE};
+        // }
 
         tick_time += GetFrameTime();
         if (tick_time > TICKS_PER_SECOND) {

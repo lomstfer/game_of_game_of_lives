@@ -15,10 +15,12 @@ int get_neighbours(std::vector<std::vector<Cell>> &world, Vec2Int pos) {
 			continue;
 
         for (int y = pos.y - 1; y < pos.y + 1; y++) {
+            if (y < 0 || y >= ROWS)
+			    continue;
             if (x == pos.x && y == pos.y)
                 continue;
             if (type != TEAM_NONE)
-                ++count;
+                count += 1;
         }
     }
 
@@ -30,18 +32,17 @@ void tick_cell(std::vector<std::vector<Cell>> &world, Vec2Int pos) {
     int count = get_neighbours(world, pos);
     
     switch (world[pos.x][pos.y]) {
-    case TEAM_NONE:
-        if (count == 3)
-            world[pos.x][pos.y] = TEAM_BLUE;
-        break;
+        case TEAM_NONE:
+            if (count == 3)
+                world[pos.x][pos.y] = TEAM_BLUE;
+            break;
 
-    case TEAM_BLUE:
-        if (count != 2 && count != 3) {
-            world[pos.x][pos.y] = TEAM_NONE;
-            printf("ded %i\n", count);
-        }
-        break;
-
+        case TEAM_BLUE:
+            printf("now %i | ", count);
+            if (count != 2 && count != 3) {
+                world[pos.x][pos.y] = TEAM_NONE;
+            }
+            break;
     }
 }
 
