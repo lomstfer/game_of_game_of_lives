@@ -6,5 +6,6 @@ Sen ville Gabriel använda insane naming conventions.
 Jag gjorde allt faktiskt arbete. 
 MVH Sode
 
-
 carl vill tydligen inte att programmet ska compilea, men det får väl gå bra. Nästa gång ska vi gora visualisering av saker men också grunden på hur saker ska ske.
+
+
