@@ -17,7 +17,7 @@ struct Vec2Int {
 
 #define BLOCK_SIZE 10
 // struct timespec, hello?
-#define TICKS_PER_SECOND 1.f
+#define TICKS_PER_SECOND 1.f / 3.f
 
 const int COLUMNS = WINDOW_WIDTH / BLOCK_SIZE;
 const int ROWS = WINDOW_HEIGTH / BLOCK_SIZE;

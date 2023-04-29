@@ -3,23 +3,31 @@
 #include <utils.hpp>
 #include <cassert>
 
+int get_cell(std::vector<std::vector<Cell>> &world, Vec2Int pos) {
+    return world[pos.y][pos.x];
+}
+
+void set_cell(std::vector<std::vector<Cell>> &world, Vec2Int pos, int type) {
+    world[pos.y][pos.x] = type;
+}
+
 int get_neighbours(std::vector<std::vector<Cell>> &world, Vec2Int pos) {
     int count = 0;
-    Cell type = world[pos.x][pos.y];
+    //Cell type = get_cell(world, pos);
     
     if (pos.x < 0 || pos.y < 0 || pos.x > COLUMNS || pos.y > ROWS)
         printf("\x1b[31mBUG: get_neighbors: out of range: %d, %d\x1b[m\n", pos.x, pos.y);
 
-    for (int x = pos.x - 1; x < pos.x + 1; x++) {
+    for (int x = pos.x - 1; x <= pos.x + 1; x++) {
 		if (x < 0 || x >= COLUMNS)
 			continue;
 
-        for (int y = pos.y - 1; y < pos.y + 1; y++) {
+        for (int y = pos.y - 1; y <= pos.y + 1; y++) {
             if (y < 0 || y >= ROWS)
 			    continue;
             if (x == pos.x && y == pos.y)
                 continue;
-            if (type != TEAM_NONE)
+            if (get_cell(world, {x, y}) != TEAM_NONE)
                 count += 1;
         }
     }
@@ -27,20 +35,18 @@ int get_neighbours(std::vector<std::vector<Cell>> &world, Vec2Int pos) {
     return count;
 }
 
+void tick_cell(std::vector<std::vector<Cell>> &world, std::vector<std::vector<Cell>> &world_copy, Vec2Int pos) {
+    int count = get_neighbours(world_copy, pos);
 
-void tick_cell(std::vector<std::vector<Cell>> &world, Vec2Int pos) {
-    int count = get_neighbours(world, pos);
-    
-    switch (world[pos.x][pos.y]) {
+    switch (get_cell(world_copy, pos)) {
         case TEAM_NONE:
             if (count == 3)
-                world[pos.x][pos.y] = TEAM_BLUE;
+                set_cell(world, pos, TEAM_BLUE);
             break;
 
         case TEAM_BLUE:
-            printf("now %i | ", count);
             if (count != 2 && count != 3) {
-                world[pos.x][pos.y] = TEAM_NONE;
+                set_cell(world, pos, TEAM_NONE);
             }
             break;
     }

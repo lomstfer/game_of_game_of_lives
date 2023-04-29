@@ -17,8 +17,10 @@ enum team {
 
 typedef int Cell;
 
+int get_cell(std::vector<std::vector<Cell>> &world, Vec2Int pos);
+void set_cell(std::vector<std::vector<Cell>> &world, Vec2Int pos, int type);
 int get_neighbours(std::vector<std::vector<Cell>> &world, Vec2Int pos);
-void tick_cell(std::vector<std::vector<Cell>> &world, Vec2Int pos);
+void tick_cell(std::vector<std::vector<Cell>> &world, std::vector<std::vector<Cell>> &world_copy, Vec2Int pos);
 int who_won(std::vector<std::vector<Cell>> &world);
 
 #endif
