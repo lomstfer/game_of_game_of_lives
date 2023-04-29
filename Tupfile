@@ -1,10 +1,18 @@
 PROGRAM=life
-CXX=g++
-CXXFLAGS = -pipe -O3 -march=native -Wall -Wextra -Wpedantic -Werror -flto -I include
-LDFLAGS = -flto -L lib -lraylib -lopengl32 -lgdi32 -lwinmm -lws2_32
+import CXX=c++
+import CXXFLAGS=-pipe -O3 -flto -Wall -Wextra -Wpedantic -Werror
+import LDFLAGS=-flto
 
-!cxx = |> ^cj %o^ $(CXX) -c -o %o %f $(CXXFLAGS) |>
-!ld = |> ^cj %o^ $(CXX) -o %o %f $(LDFLAGS) |>
+CXXFLAGS+=-I include
+
+ifeq ($(TUP_PLATFORM),win32)
+	LDFLAGS+=-L lib -lraylib -lopengl32 -lgdi32 -lwinmm -lws2_32
+else
+	LDFLAGS+=-lraylib
+endif
+
+!cxx = |> ^cj^ $(CXX) -c -o %o %f $(CXXFLAGS) |>
+!ld = |> ^cj^ $(CXX) -o %o %f $(LDFLAGS) |>
 
 : foreach src/*.cpp |> !cxx |> obj/%B.o {objs}
-: {objs} |> !ld |> a.exe
+: {objs} |> !ld |> $(PROGRAM)
