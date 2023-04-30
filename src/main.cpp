@@ -13,7 +13,7 @@ void draw_world(std::vector<std::vector<Cell>> &world);
 void exit_now();
 
 int main() {
-    InitWindow(WINDOW_WIDTH, WINDOW_HEIGTH, "Game of Life");
+    InitWindow(WINDOW_WIDTH, WINDOW_HEIGTH, "Game of Game of Life");
 
     std::vector<std::vector<Cell>> world;
     world.reserve(ROWS);
