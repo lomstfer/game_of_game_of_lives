@@ -26,7 +26,7 @@ int main() {
         world.push_back(temp_row);
     }
 
-    int blue_inventory = 5;
+    int blue_inventory = CELLS_PER_TURN;
     int red_inventory = 0;
 
     while (true) {
