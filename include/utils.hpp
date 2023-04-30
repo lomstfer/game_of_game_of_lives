@@ -5,7 +5,7 @@
 #include <vector>
 #include <iostream>
 
-struct Vec2Int {
+struct Vector2I {
     int x;
     int y;
 };
@@ -19,12 +19,12 @@ struct Vec2Int {
 // struct timespec, hello?
 #define TICKS_PER_SECOND 1.f / 3.f
 
-const int COLUMNS = WINDOW_WIDTH / BLOCK_SIZE;
-const int ROWS = WINDOW_HEIGTH / BLOCK_SIZE;
+#define COLUMNS WINDOW_WIDTH / BLOCK_SIZE
+#define ROWS WINDOW_HEIGTH / BLOCK_SIZE
 
 Vector2 operator/(Vector2 v, float f);
 Vector2 operator*(Vector2 v, float f);
 std::ostream& operator<<(std::ostream& os, Vector2 v);
-std::ostream& operator<<(std::ostream& os, Vec2Int v);
+std::ostream& operator<<(std::ostream& os, Vector2 v);
 
 #endif

@@ -14,7 +14,7 @@ std::ostream& operator<<(std::ostream& os, Vector2 v) {
     return os;
 }
 
-std::ostream& operator<<(std::ostream& os, Vec2Int v) {
+std::ostream& operator<<(std::ostream& os, Vector2I v) {
     os << v.x << ", " << v.y;
     return os;
 }
