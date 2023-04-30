@@ -5,10 +5,10 @@ import LDFLAGS=-flto
 
 CXXFLAGS+=-I include
 
-ifeq ($(TUP_PLATFORM),linux)
-	LDFLAGS+=-lraylib
-else
+ifeq (@(TUP_PLATFORM),win32)
 	LDFLAGS+=-L lib -lraylib -lopengl32 -lgdi32 -lwinmm -lws2_32
+else
+	LDFLAGS+=-lraylib
 endif
 
 !cxx = |> ^cj^ $(CXX) -c -o %o %f $(CXXFLAGS) |>
