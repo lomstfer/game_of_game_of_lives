@@ -7,13 +7,10 @@ enum game_states {
     SIMULATING,
     MENU
 };
-static int state = BLUE_TURN;
+int state = BLUE_TURN;
 
-#define CELLS_PER_TURN 5
-#define TICKS_PER_TURN 3
-
-static int cells_placed = 0;
-static float tick_time = 0;
-static int tick_count = 0;
+int cells_placed = 0;
+float tick_time = 0;
+int tick_count = 0;
 
 #endif

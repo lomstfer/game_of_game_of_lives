@@ -1,5 +1,7 @@
 #include <vector>
 #include <iostream>
+#include <sstream>
+#include <string>
 
 #include <raylib.h>
 
@@ -24,22 +26,27 @@ int main() {
         world.push_back(temp_row);
     }
 
-
+    int blue_inventory = 5;
+    int red_inventory = 0;
 
     while (true) {
         if (WindowShouldClose())
             exit_now();
-        
-        if (!IsKeyPressed(KEY_ENTER)) {
+
+        if (IsKeyPressed(KEY_ENTER)) {
 			cells_placed = 0;
 			switch (state)
 			{
 			case BLUE_TURN:
 				state = RED_TURN;
+                blue_inventory = 0;
+                red_inventory += CELLS_PER_TURN;
 				break;
 			
 			case RED_TURN:
 				state = SIMULATING;
+                red_inventory = 0;
+                blue_inventory += CELLS_PER_TURN;
 				break;
 			}
         }
@@ -47,42 +54,63 @@ int main() {
         switch (state)
         {
         case BLUE_TURN:
-            if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                 int x = GetMouseX() / BLOCK_SIZE;
                 int y = GetMouseY() / BLOCK_SIZE;
                 if ((x >= 0 && x < COLUMNS) && (y >= 0 && y < ROWS)) {
-                    set_cell(world, {x, y}, TEAM_BLUE);
+                    Cell prev_type = get_cell(world, {x, y});
+                    if (prev_type == TEAM_NONE && blue_inventory > 0) {
+                        set_cell(world, {x, y}, TEAM_BLUE);
+                        blue_inventory--;
+                        break;
+                    }
+
+                    if (prev_type == TEAM_BLUE) {
+                        set_cell(world, {x, y}, TEAM_NONE);
+                        blue_inventory++;
+                        break;
+                    }
+
                 }
             }
             break;
         
-        case RED_TURN:
-			if (IsMouseButtonDown(MOUSE_BUTTON_LEFT)) {
+        case RED_TURN:  
+            if (IsMouseButtonPressed(MOUSE_BUTTON_LEFT)) {
                 int x = GetMouseX() / BLOCK_SIZE;
                 int y = GetMouseY() / BLOCK_SIZE;
                 if ((x >= 0 && x < COLUMNS) && (y >= 0 && y < ROWS)) {
-                    set_cell(world, {x, y}, TEAM_RED);
+                    Cell prev_type = get_cell(world, {x, y});
+
+                    if (prev_type == TEAM_NONE && red_inventory > 0) {
+                        set_cell(world, {x, y}, TEAM_RED);
+                        red_inventory--;
+                        break;
+                    }
+
+                    if (prev_type == TEAM_RED) {
+                        set_cell(world, {x, y}, TEAM_NONE);
+                        red_inventory++;
+                        break;
+                    }
+
                 }
             }
             break;
         
-        case SIMULATING:
-			std::vector<std::vector<Cell>> world_copy;
-			for (size_t y = 0; y < ROWS; y++) {
-				std::vector<Cell> temp_row;
-				for (size_t x = 0; x < COLUMNS; x++) {
-					temp_row.push_back(world[y][x]);
-				}
-				world_copy.push_back(temp_row);
-			}
+        case SIMULATING: 
+			std::vector<std::vector<Cell>> world_copy(world);
 
 			tick_time += GetFrameTime();
 			if (tick_time > TICKS_PER_SECOND) {
 				tick_time = 0;
 				tick_count++;
 
-				if (tick_count > TICKS_PER_TURN)
+				if (tick_count > TICKS_PER_TURN) {
+                    tick_count = 0;
 					state = BLUE_TURN;
+                    break;
+                }
 
 				for (int x = 0; x < COLUMNS; x++) {
 					for (int y = 0; y < ROWS; y++) {
@@ -91,7 +119,6 @@ int main() {
 				}
 			}
             break;
-
         }
 
 
@@ -99,6 +126,37 @@ int main() {
 		BeginDrawing();
 		ClearBackground(COLOR_DEAD);
 		draw_world(world);
+
+
+        std::stringstream ss_cells;
+        std::stringstream ss_balance;
+
+        switch (state)
+        {
+        case BLUE_TURN: 
+            ss_cells << "Cells left: " << blue_inventory;
+            DrawText("Blues turn...", 5, 5, 20, WHITE);
+            break;
+
+        case RED_TURN: 
+            ss_cells << "Cells left: " << red_inventory;
+            DrawText("Reds turn...", 5, 5, 20, WHITE);
+            break;
+
+        case SIMULATING:
+            DrawText("Simulating...", 5, 5, 20, WHITE);
+            break;
+        }
+
+        std::string cells_left_str = ss_cells.str();
+        DrawText(cells_left_str.c_str(), 5, 40, 20, WHITE);
+        
+        CellCount count = count_cells(world);
+        ss_balance << count.blues << " blues - " << count.reds << " reds"; 
+        std::string balance_str = ss_balance.str();
+        DrawText(balance_str.c_str(), 5, 75, 20, WHITE);
+
+
 		EndDrawing();
     }
 

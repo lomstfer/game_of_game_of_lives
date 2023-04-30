@@ -10,17 +10,24 @@ struct Vector2I {
     int y;
 };
 
+struct CellCount {
+    int blues;
+    int reds;
+};
+
 #define LOG(...) std::cout << __VA_ARGS__ << std::endl;
 
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGTH 720
 
-#define BLOCK_SIZE 10
+#define BLOCK_SIZE 50
 // struct timespec, hello?
 #define TICKS_PER_SECOND 1.f / 3.f
+#define CELLS_PER_TURN 5
+#define TICKS_PER_TURN 3
 
-#define COLUMNS WINDOW_WIDTH / BLOCK_SIZE
-#define ROWS WINDOW_HEIGTH / BLOCK_SIZE
+const int COLUMNS = WINDOW_WIDTH / BLOCK_SIZE;
+const int ROWS = WINDOW_HEIGTH / BLOCK_SIZE;
 
 Vector2 operator/(Vector2 v, float f);
 Vector2 operator*(Vector2 v, float f);
