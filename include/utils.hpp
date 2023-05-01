@@ -1,18 +1,18 @@
 #ifndef UTILS_HPP
 #define UTILS_HPP
 
+#include <iostream>
 #include <raylib.h>
 #include <vector>
-#include <iostream>
 
 struct Vector2I {
-    int x;
-    int y;
+	int x;
+	int y;
 };
 
 struct CellCount {
-    int blues;
-    int reds;
+	int blues;
+	int reds;
 };
 
 #define LOG(...) std::cout << __VA_ARGS__ << std::endl;
@@ -30,7 +30,7 @@ const int ROWS = WINDOW_HEIGTH / BLOCK_SIZE;
 
 Vector2 operator/(Vector2 v, float f);
 Vector2 operator*(Vector2 v, float f);
-std::ostream& operator<<(std::ostream& os, Vector2 v);
-std::ostream& operator<<(std::ostream& os, Vector2 v);
+std::ostream &operator<<(std::ostream &os, Vector2 v);
+std::ostream &operator<<(std::ostream &os, Vector2 v);
 
 #endif
