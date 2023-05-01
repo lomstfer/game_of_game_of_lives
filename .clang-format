@@ -1,20 +1,18 @@
 UseTab: Always
 IndentWidth: 8
 TabWidth: 8
-BreakBeforeBraces: Custom
 ConstructorInitializerIndentWidth: 8
 ContinuationIndentWidth: 8
+BreakBeforeBraces: Custom
 BraceWrapping:
   AfterFunction: true
   AfterEnum: false
 AlignAfterOpenBracket: DontAlign
-BreakBeforeBraces: Attach
 AllowShortEnumsOnASingleLine: false
 PointerAlignment: Left
 AlignAfterOpenBracket: Align
 AllowAllParametersOfDeclarationOnNextLine: false
 BinPackParameters: true
-AlignConsecutiveMacros: Consecutive
 AllowAllArgumentsOnNextLine: false
 AlignConsecutiveMacros: Consecutive
 AlignEscapedNewlines: DontAlign

@@ -12,7 +12,8 @@
 void draw_world(std::vector<std::vector<Cell>>& world);
 void exit_now();
 
-int main() {
+int main()
+{
 	InitWindow(WINDOW_WIDTH, WINDOW_HEIGTH, "Game of Game of Life");
 
 	std::vector<std::vector<Cell>> world;
@@ -165,7 +166,8 @@ int main() {
 	exit_now();
 }
 
-void draw_world(std::vector<std::vector<Cell>>& world) {
+void draw_world(std::vector<std::vector<Cell>>& world)
+{
 	for (int x = 0; x < COLUMNS; x++) {
 		for (int y = 0; y < ROWS; y++) {
 			DrawRectangleLines(x * BLOCK_SIZE, y * BLOCK_SIZE,
@@ -186,7 +188,8 @@ void draw_world(std::vector<std::vector<Cell>>& world) {
 	}
 }
 
-void exit_now() {
+void exit_now()
+{
 	CloseWindow();
 	exit(0);
 }

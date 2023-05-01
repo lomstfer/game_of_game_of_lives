@@ -12,11 +12,17 @@ enum team {
 };
 
 #define COLOR_DEAD \
-	{ 0, 0, 0, 0 }
+	{ \
+		0, 0, 0, 0 \
+	}
 #define COLOR_RED \
-	{ 255, 0, 0, 0 }
+	{ \
+		255, 0, 0, 0 \
+	}
 #define COLOR_BLUE \
-	{ 0, 0, 255, 0 }
+	{ \
+		0, 0, 255, 0 \
+	}
 
 typedef int Cell;
 
