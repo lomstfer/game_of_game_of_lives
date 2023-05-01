@@ -5,5 +5,5 @@ BreakBeforeBraces: Custom
 ConstructorInitializerIndentWidth: 8
 ContinuationIndentWidth: 8
 BraceWrapping:
-	AfterFunction: true
+  AfterFunction: true
 AlignAfterOpenBracket: DontAlign
