@@ -9,11 +9,10 @@
 #include <state_machine.hpp>
 #include <utils.hpp>
 
-void draw_world(std::vector<std::vector<Cell>> &world);
+void draw_world(std::vector<std::vector<Cell>>& world);
 void exit_now();
 
-int main()
-{
+int main() {
 	InitWindow(WINDOW_WIDTH, WINDOW_HEIGTH, "Game of Game of Life");
 
 	std::vector<std::vector<Cell>> world;
@@ -56,20 +55,20 @@ int main()
 				int x = GetMouseX() / BLOCK_SIZE;
 				int y = GetMouseY() / BLOCK_SIZE;
 				if ((x >= 0 && x < COLUMNS) &&
-					(y >= 0 && y < ROWS)) {
+				    (y >= 0 && y < ROWS)) {
 					Cell prev_type =
 						get_cell(world, {x, y});
 					if (prev_type == TEAM_NONE &&
-						blue_inventory > 0) {
+					    blue_inventory > 0) {
 						set_cell(world, {x, y},
-							TEAM_BLUE);
+							 TEAM_BLUE);
 						blue_inventory--;
 						break;
 					}
 
 					if (prev_type == TEAM_BLUE) {
 						set_cell(world, {x, y},
-							TEAM_NONE);
+							 TEAM_NONE);
 						blue_inventory++;
 						break;
 					}
@@ -82,21 +81,21 @@ int main()
 				int x = GetMouseX() / BLOCK_SIZE;
 				int y = GetMouseY() / BLOCK_SIZE;
 				if ((x >= 0 && x < COLUMNS) &&
-					(y >= 0 && y < ROWS)) {
+				    (y >= 0 && y < ROWS)) {
 					Cell prev_type =
 						get_cell(world, {x, y});
 
 					if (prev_type == TEAM_NONE &&
-						red_inventory > 0) {
+					    red_inventory > 0) {
 						set_cell(world, {x, y},
-							TEAM_RED);
+							 TEAM_RED);
 						red_inventory--;
 						break;
 					}
 
 					if (prev_type == TEAM_RED) {
 						set_cell(world, {x, y},
-							TEAM_NONE);
+							 TEAM_NONE);
 						red_inventory++;
 						break;
 					}
@@ -121,7 +120,7 @@ int main()
 				for (int x = 0; x < COLUMNS; x++) {
 					for (int y = 0; y < ROWS; y++) {
 						tick_cell(world, world_copy,
-							{x, y});
+							  {x, y});
 					}
 				}
 			}
@@ -166,29 +165,28 @@ int main()
 	exit_now();
 }
 
-void draw_world(std::vector<std::vector<Cell>> &world)
-{
+void draw_world(std::vector<std::vector<Cell>>& world) {
 	for (int x = 0; x < COLUMNS; x++) {
 		for (int y = 0; y < ROWS; y++) {
 			DrawRectangleLines(x * BLOCK_SIZE, y * BLOCK_SIZE,
-				BLOCK_SIZE, BLOCK_SIZE, {40, 40, 40, 255});
+					   BLOCK_SIZE, BLOCK_SIZE,
+					   {40, 40, 40, 255});
 
 			switch (get_cell(world, {x, y})) {
 			case TEAM_RED:
 				DrawRectangle(x * BLOCK_SIZE, y * BLOCK_SIZE,
-					BLOCK_SIZE, BLOCK_SIZE, RED);
+					      BLOCK_SIZE, BLOCK_SIZE, RED);
 				break;
 			case TEAM_BLUE:
 				DrawRectangle(x * BLOCK_SIZE, y * BLOCK_SIZE,
-					BLOCK_SIZE, BLOCK_SIZE, BLUE);
+					      BLOCK_SIZE, BLOCK_SIZE, BLUE);
 				break;
 			}
 		}
 	}
 }
 
-void exit_now()
-{
+void exit_now() {
 	CloseWindow();
 	exit(0);
 }

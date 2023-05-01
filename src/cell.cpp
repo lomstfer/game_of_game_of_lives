@@ -4,19 +4,16 @@
 #include <cell.hpp>
 #include <utils.hpp>
 
-int get_cell(std::vector<std::vector<Cell>> &world, Vector2I pos)
-{
+int get_cell(std::vector<std::vector<Cell>>& world, Vector2I pos) {
 	return world[pos.y][pos.x];
 }
 
-void set_cell(std::vector<std::vector<Cell>> &world, Vector2I pos, int type)
-{
+void set_cell(std::vector<std::vector<Cell>>& world, Vector2I pos, int type) {
 	world[pos.y][pos.x] = type;
 	return;
 }
 
-CellCount get_neighbours(std::vector<std::vector<Cell>> &world, Vector2I pos)
-{
+CellCount get_neighbours(std::vector<std::vector<Cell>>& world, Vector2I pos) {
 	int blue_count = 0;
 	int red_count = 0;
 	// Cell type = get_cell(world, pos);
@@ -24,7 +21,7 @@ CellCount get_neighbours(std::vector<std::vector<Cell>> &world, Vector2I pos)
 	if (pos.x < 0 || pos.y < 0 || pos.x > COLUMNS || pos.y > ROWS) {
 		printf("\x1b[31mBUG: get_neighbors: out of range: %d, "
 		       "%d\x1b[m\n",
-			pos.x, pos.y);
+		       pos.x, pos.y);
 		return {0, 0};
 	}
 
@@ -51,9 +48,8 @@ CellCount get_neighbours(std::vector<std::vector<Cell>> &world, Vector2I pos)
 	return {blue_count, red_count};
 }
 
-void tick_cell(std::vector<std::vector<Cell>> &world,
-	std::vector<std::vector<Cell>> &world_copy, Vector2I pos)
-{
+void tick_cell(std::vector<std::vector<Cell>>& world,
+	       std::vector<std::vector<Cell>>& world_copy, Vector2I pos) {
 	CellCount counts = get_neighbours(world_copy, pos);
 
 	int blues = counts.blues;
@@ -94,8 +90,7 @@ void tick_cell(std::vector<std::vector<Cell>> &world,
 	return;
 }
 
-CellCount count_cells(std::vector<std::vector<Cell>> &world)
-{
+CellCount count_cells(std::vector<std::vector<Cell>>& world) {
 	int blue_count = 0;
 	int red_count = 0;
 
