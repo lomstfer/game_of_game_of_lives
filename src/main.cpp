@@ -19,7 +19,6 @@ int main() {
     world.reserve(ROWS);
     for (size_t y = 0; y < ROWS; y++) {
         std::vector<Cell> temp_row;
-        world[y].reserve(COLUMNS);
         for (size_t x = 0; x < COLUMNS; x++) {
             temp_row.push_back(TEAM_NONE);
         }
