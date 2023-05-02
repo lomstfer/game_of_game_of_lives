@@ -11,8 +11,8 @@ else
 	LDFLAGS+=-lraylib
 endif
 
-!cxx = |> ^cj^ $(CXX) -c -o %o %f $(CXXFLAGS) |>
-!ld = |> ^cj^ $(CXX) -o %o %f $(LDFLAGS) |>
+!cxx = |> ^cj CXX %f^ $(CXX) -c -o %o %f $(CXXFLAGS) |>
+!ld = |> ^cj LD %o^ $(CXX) -o %o %f $(LDFLAGS) |>
 
 : foreach src/*.cpp |> !cxx |> obj/%B.o {objs}
 : {objs} |> !ld |> $(PROGRAM)
