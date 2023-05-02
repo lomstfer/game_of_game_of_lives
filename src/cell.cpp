@@ -19,7 +19,6 @@ CellCount get_neighbours(std::vector<std::vector<Cell>>& world, Vector2I pos)
 {
 	int blue_count = 0;
 	int red_count = 0;
-	// Cell type = get_cell(world, pos);
 
 	if (pos.x < 0 || pos.y < 0 || pos.x > COLUMNS || pos.y > ROWS) {
 		printf("\x1b[31mBUG: get_neighbors: out of range: %d, "
