@@ -63,8 +63,10 @@ void tick_cell(std::vector<std::vector<Cell>>& world,
 
 	if (blues > reds) {
 		team = TEAM_BLUE;
-	} else {
+	} else if (blues < reds) {
 		team = TEAM_RED;
+	} else {
+		team = TEAM_NONE;
 	}
 
 	switch (get_cell(world_copy, pos)) {

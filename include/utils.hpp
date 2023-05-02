@@ -20,10 +20,10 @@ struct CellCount {
 #define WINDOW_WIDTH  1280
 #define WINDOW_HEIGTH 720
 
-#define BLOCK_SIZE	 20
-#define TICKS_PER_SECOND 1.f / 3.f
-#define CELLS_PER_TURN	 5
-#define TICKS_PER_TURN	 3
+#define BLOCK_SIZE 20
+#define TICKS_PER_SECOND 1.f / 10.f
+#define CELLS_PER_TURN 10
+#define TICKS_PER_TURN 99999999
 
 const int COLUMNS = WINDOW_WIDTH / BLOCK_SIZE;
 const int ROWS = WINDOW_HEIGTH / BLOCK_SIZE;
