@@ -112,11 +112,11 @@ int main()
 				tick_time = 0;
 				tick_count++;
 
-				if (tick_count > TICKS_PER_TURN) {
+				/* if (tick_count > TICKS_PER_TURN) {
 					tick_count = 0;
 					state = BLUE_TURN;
 					break;
-				}
+				} */
 
 				for (int x = 0; x < COLUMNS; x++) {
 					for (int y = 0; y < ROWS; y++) {
