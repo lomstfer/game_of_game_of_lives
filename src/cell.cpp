@@ -75,7 +75,7 @@ void tick_cell(std::vector<std::vector<Cell>>& world,
 
 	case TEAM_BLUE:
 		if (blues != 2 && blues != 3) {
-			if (total == 3 && team == TEAM_RED)
+			if (team == TEAM_RED)
 				set_cell(world, pos, TEAM_RED);
 			else
 				set_cell(world, pos, TEAM_NONE);
@@ -84,7 +84,7 @@ void tick_cell(std::vector<std::vector<Cell>>& world,
 
 	case TEAM_RED:
 		if (reds != 2 && reds != 3) {
-			if (total == 3 && team == TEAM_BLUE)
+			if (team == TEAM_BLUE)
 				set_cell(world, pos, TEAM_BLUE);
 			else
 				set_cell(world, pos, TEAM_NONE);
