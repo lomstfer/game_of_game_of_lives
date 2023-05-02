@@ -1,4 +1,4 @@
-PROGRAM=life.exe
+PROGRAM=life
 import CXX=c++
 import CXXFLAGS=-pipe -O3 -flto -Wall -Wextra -Wpedantic -Werror
 import LDFLAGS=-flto
@@ -6,6 +6,7 @@ import LDFLAGS=-flto
 CXXFLAGS+=-I include
 
 ifeq (@(TUP_PLATFORM),win32)
+	PROGRAM_SUFFIX=.exe
 	LDFLAGS+=-L lib -lraylib -lopengl32 -lgdi32 -lwinmm -lws2_32
 else
 	LDFLAGS+=-lraylib
@@ -15,4 +16,4 @@ endif
 !ld = |> ^cj LD %o^ $(CXX) -o %o %f $(LDFLAGS) |>
 
 : foreach src/*.cpp |> !cxx |> obj/%B.o {objs}
-: {objs} |> !ld |> $(PROGRAM)
+: {objs} |> !ld |> $(PROGRAM)$(PROGRAM_SUFFIX)
