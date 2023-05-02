@@ -63,7 +63,7 @@ void tick_cell(std::vector<std::vector<Cell>>& world,
 
 	if (blues > reds) {
 		team = TEAM_BLUE;
-	} else {
+	} else if (reds > blues) {
 		team = TEAM_RED;
 	}
 
