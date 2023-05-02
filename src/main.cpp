@@ -29,6 +29,8 @@ int main()
 	int blue_inventory = CELLS_PER_TURN;
 	int red_inventory = 0;
 
+	float ticks_per_second_miltiplier = 1;
+
 	while (true) {
 		if (WindowShouldClose())
 			exit_now();
@@ -105,10 +107,20 @@ int main()
 			break;
 
 		case SIMULATING:
+			if (IsKeyDown(KEY_UP)) {
+				if (ticks_per_second_miltiplier > 0)
+					ticks_per_second_miltiplier -= GetFrameTime() * 0.2f;
+				else
+					ticks_per_second_miltiplier = 0;
+			}
+			if (IsKeyDown(KEY_DOWN)) {
+				ticks_per_second_miltiplier += GetFrameTime() * 0.2f;
+			}
+
 			std::vector<std::vector<Cell>> world_copy(world);
 
 			tick_time += GetFrameTime();
-			if (tick_time > TICKS_PER_SECOND) {
+			if (tick_time > TICKS_PER_SECOND * ticks_per_second_miltiplier) {
 				tick_time = 0;
 				tick_count++;
 
