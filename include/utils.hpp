@@ -10,11 +10,6 @@ struct Vector2I {
 	int y;
 };
 
-struct CellCount {
-	int blues;
-	int reds;
-};
-
 #define LOG(...) std::cout << __VA_ARGS__ << std::endl;
 
 #define WINDOW_WIDTH  1280

@@ -26,6 +26,11 @@ enum team {
 
 typedef int Cell;
 
+struct CellCount {
+	int blues;
+	int reds;
+};
+
 int get_cell(std::vector<std::vector<Cell>>& world, Vector2I pos);
 void set_cell(std::vector<std::vector<Cell>>& world, Vector2I pos, int type);
 
