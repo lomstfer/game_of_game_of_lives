@@ -1,6 +1,6 @@
 PROGRAM=life
 import CXX=c++
-import CXXFLAGS=-pipe -g3 -Wall -Wextra -Wconversion -Wdouble-promotion -Wno-comment -Werror
+import CXXFLAGS=-pipe -g3 -Wall -Wextra -Wconversion -Wdouble-promotion -Werror
 import LDFLAGS
 
 CXXFLAGS+=-I include
