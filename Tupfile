@@ -9,7 +9,7 @@ CXXFLAGS+=-I include
 
 ifeq (@(TUP_PLATFORM),win32)
 	PROGRAM_SUFFIX=.exe
-	LDFLAGS+=-L lib -lraylib -lopengl32 -lgdi32 -lwinmm -lws2_32
+	LDFLAGS+=-L lib -lraylib -lopengl32 -lgdi32 -lwinmm -lws2_32 -mwindows
 else
 	LDFLAGS+=-lraylib
 endif
