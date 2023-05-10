@@ -9,10 +9,34 @@
 #include <state_machine.hpp>
 #include <utils.hpp>
 
-void entire_program_thing(std::vector<std::vector<Cell>>& world, int& blue_inventory, int& red_inventory, float ticks_per_second_multiplier);
+/// Description:        A function checks for input and modifies data to make the program work.
+/// Argument 1:         std::vector<std::vector<Cell>>, a 2d array representing the world.
+/// Argument 2:         int, the number of cells team blue has left to place out.
+/// Argument 3:         int, the number of cells team red has left to place out.
+/// Argument 4:         float, bigger means faster game and smaller means slower game.
+void game_loop(std::vector<std::vector<Cell>>& world, int& blue_inventory, int& red_inventory, float& ticks_per_second_multiplier);
+
+/// Description:        A function that draws all of text.
+/// Argument 1:         std::vector<std::vector<Cell>>, a 2d array representing the world.
+/// Argument 2:         int, the number of cells team blue has left to place out.
+/// Argument 3:         int, the number of cells team red has left to place out.
+/// Example:         	draw_world( 
+///								{ {TEAM_NONE, TEAM_BLUE, TEAM_NONE},
+///								{TEAM_NONE, TEAM_RED, TEAM_NONE},
+///								{TEAM_NONE, TEAM_BLUE, TEAM_NONE} },
+///								{1, 1}
+///						#===> draws all the text to the window
 void draw_info(std::vector<std::vector<Cell>>& world, int blue_inventory, int red_inventory);
+
+/// Description:        A function that draws all of the cells and the grid.
+/// Argument 1:         std::vector<std::vector<Cell>>, a 2d array representing the world.
+/// Example:         	draw_world( 
+///								{ {TEAM_NONE, TEAM_BLUE, TEAM_NONE},
+///								{TEAM_NONE, TEAM_RED, TEAM_NONE},
+///								{TEAM_NONE, TEAM_BLUE, TEAM_NONE} },
+///								{1, 1}
+///						#===> draws all the active cells to the window with their color and the other cells black
 void draw_world(std::vector<std::vector<Cell>>& world);
-void exit_now(void);
 
 int main(void)
 {
@@ -34,7 +58,7 @@ int main(void)
 	float ticks_per_second_multiplier = 1;
 
 	while (!WindowShouldClose()) {
-		entire_program_thing(world, blue_inventory, red_inventory, ticks_per_second_multiplier);
+		game_loop(world, blue_inventory, red_inventory, ticks_per_second_multiplier);
 
 		BeginDrawing();
 		
@@ -45,10 +69,10 @@ int main(void)
 		EndDrawing();
 	}
 
-	exit_now();
+	CloseWindow();
 }
 
-void entire_program_thing(std::vector<std::vector<Cell>>& world, int& blue_inventory, int& red_inventory, float ticks_per_second_multiplier)
+void game_loop(std::vector<std::vector<Cell>>& world, int& blue_inventory, int& red_inventory, float& ticks_per_second_multiplier)
 {
 	if (IsKeyPressed(KEY_ENTER)) {
 		cells_placed = 0;
@@ -138,12 +162,6 @@ void entire_program_thing(std::vector<std::vector<Cell>>& world, int& blue_inven
 			tick_time = 0;
 			tick_count++;
 
-			/* if (tick_count > TICKS_PER_TURN) {
-				tick_count = 0;
-				state = BLUE_TURN;
-				break;
-			} */
-
 			for (int x = 0; x < COLUMNS; x++) {
 				for (int y = 0; y < ROWS; y++) {
 					tick_cell(world, world_copy,
@@ -153,6 +171,7 @@ void entire_program_thing(std::vector<std::vector<Cell>>& world, int& blue_inven
 		}
 		break;
 	}
+	return;
 }
 
 void draw_info(std::vector<std::vector<Cell>>& world, int blue_inventory, int red_inventory) {
@@ -183,6 +202,7 @@ void draw_info(std::vector<std::vector<Cell>>& world, int blue_inventory, int re
 			<< " reds";
 	std::string balance_str = ss_balance.str();
 	DrawText(balance_str.c_str(), 5, 75, 20, WHITE);
+	return;
 }
 
 void draw_world(std::vector<std::vector<Cell>>& world)
@@ -190,25 +210,20 @@ void draw_world(std::vector<std::vector<Cell>>& world)
 	for (int x = 0; x < COLUMNS; x++) {
 		for (int y = 0; y < ROWS; y++) {
 			DrawRectangleLines(x * BLOCK_SIZE, y * BLOCK_SIZE,
-					   BLOCK_SIZE, BLOCK_SIZE,
-					   {40, 40, 40, 255});
+				BLOCK_SIZE, BLOCK_SIZE,
+				{40, 40, 40, 255});
 
 			switch (get_cell(world, {x, y})) {
 			case TEAM_RED:
 				DrawRectangle(x * BLOCK_SIZE, y * BLOCK_SIZE,
-					      BLOCK_SIZE, BLOCK_SIZE, RED);
+					BLOCK_SIZE, BLOCK_SIZE, RED);
 				break;
 			case TEAM_BLUE:
 				DrawRectangle(x * BLOCK_SIZE, y * BLOCK_SIZE,
-					      BLOCK_SIZE, BLOCK_SIZE, BLUE);
+					BLOCK_SIZE, BLOCK_SIZE, BLUE);
 				break;
 			}
 		}
 	}
-}
-
-void exit_now()
-{
-	CloseWindow();
-	exit(0);
+	return;
 }

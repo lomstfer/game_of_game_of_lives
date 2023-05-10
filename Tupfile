@@ -1,8 +1,10 @@
 PROGRAM=life
+
 import CXX=c++
-import CXXFLAGS=-pipe -g3 -Wall -Wextra -Wconversion -Wdouble-promotion -Werror
+import CXXFLAGS=-pipe -O3
 import LDFLAGS
 
+CXXFLAGS+=-Wall -Wextra -Wconversion -Wdouble-promotion -Wpedantic -Werror
 CXXFLAGS+=-I include
 
 ifeq (@(TUP_PLATFORM),win32)

@@ -4,12 +4,12 @@
 #include <cell.hpp>
 #include <utils.hpp>
 
-int get_cell(std::vector<std::vector<Cell>>& world, Vector2I pos)
+Cell get_cell(std::vector<std::vector<Cell>>& world, Vector2I pos)
 {
 	return world[pos.y][pos.x];
 }
 
-void set_cell(std::vector<std::vector<Cell>>& world, Vector2I pos, int type)
+void set_cell(std::vector<std::vector<Cell>>& world, Vector2I pos, Cell type)
 {
 	world[pos.y][pos.x] = type;
 	return;

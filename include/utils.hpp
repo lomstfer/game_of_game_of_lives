@@ -18,10 +18,9 @@ struct Vector2I {
 #define BLOCK_SIZE 20
 #define TICKS_PER_SECOND 1.f / 10.f
 #define CELLS_PER_TURN 10
-#define TICKS_PER_TURN 10
 
-const int COLUMNS = WINDOW_WIDTH / BLOCK_SIZE;
-const int ROWS = WINDOW_HEIGTH / BLOCK_SIZE;
+#define COLUMNS (WINDOW_WIDTH / BLOCK_SIZE)
+#define ROWS (WINDOW_HEIGTH / BLOCK_SIZE)
 
 Vector2 operator/(Vector2 v, float f);
 Vector2 operator*(Vector2 v, float f);
